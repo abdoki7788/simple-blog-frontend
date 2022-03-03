@@ -1,8 +1,8 @@
 <template>
   <Navbar/>
-  <b-container>
+  <div class="container">
     <router-view/>
-  </b-container>
+  </div>
 </template>
 
 <script>
@@ -10,6 +10,14 @@
   export default {
     components : {
       Navbar
+    },
+    watch: {
+      $route() {
+        this.$store.commit("onStart")
+      }
+    },
+    mounted() {
+      this.$store.commit("onStart")
     }
   }
 </script>
