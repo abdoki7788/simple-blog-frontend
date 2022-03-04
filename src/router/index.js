@@ -8,6 +8,7 @@ import store         from '@/store'
 import Register      from '@/views/Register.vue'
 import Article       from '@/views/Article.vue'
 import AddArticle    from '@/views/AddArticle.vue'
+import EditArticle   from '@/views/EditArticle.vue'
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     path: '/article/:slug',
     name: 'article',
     component: Article
+  },
+  {
+    path: '/article/:slug/edit',
+    name: 'editArticle',
+    component: EditArticle
   },
   {
     path: '/add',
