@@ -27,7 +27,7 @@ export default {
 		doAdd() {
 			let article = {
 				"title": this.title,
-				"slug": this.title.replaceAll(' ', '-'),
+				"slug": this.title.replaceAll(' ', '-').replaceAll('?', '').replaceAll('!', '').toLowerCase(),
 				"content": this.content
 			}
 			this.articles.push(article)

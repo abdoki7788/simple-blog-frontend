@@ -30,7 +30,7 @@ export default {
 		doEdit() {
 			let articleIndex = this.articles.findIndex(article => article.slug == this.$route.params.slug)
 			this.articles[articleIndex].title = this.title
-			this.articles[articleIndex].slug = this.title.replaceAll(' ', '-')
+			this.articles[articleIndex].slug = this.title.replaceAll(' ', '-').replaceAll('?', '').replaceAll('!', '').toLowerCase()
 			this.articles[articleIndex].content = this.content
 			localStorage.setItem('articles', JSON.stringify(this.articles))
 			this.$router.push(`/article/${this.articles[articleIndex].slug}`)
