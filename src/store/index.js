@@ -22,6 +22,7 @@ export default createStore({
       if (token) {
         state.isAuthenticated = true
         state.token = token
+        localStorage.setItem('token', token)
       } else {
         state.isAuthenticated = false
         state.token = ''

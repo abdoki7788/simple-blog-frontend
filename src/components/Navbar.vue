@@ -11,7 +11,13 @@
 						<router-link to="/" class="navbar-link">home</router-link>
 					</li>
 					<li class="nav-item">
-						<router-link to="/about" class="navbar-link">about</router-link>
+						<router-link to="/profile" class="navbar-link" v-if="$store.state.isAuthenticated">profile</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link to="/login" class="navbar-link" v-if="!$store.state.isAuthenticated">login</router-link>
+					</li>
+					<li class="nav-item">
+						<router-link to="/logout" class="navbar-link" v-if="$store.state.isAuthenticated">logout</router-link>
 					</li>
 				</ul>
 				<form class="d-flex">
