@@ -6,7 +6,8 @@ import Login         from '@/views/Login.vue'
 import Logout        from '@/views/Logout.vue'
 import store         from '@/store'
 import Register      from '@/views/Register.vue'
-import Article      from '@/views/Article.vue'
+import Article       from '@/views/Article.vue'
+import AddArticle    from '@/views/AddArticle.vue'
 
 const routes = [
   {
@@ -18,6 +19,12 @@ const routes = [
     path: '/article/:slug',
     name: 'article',
     component: Article
+  },
+  {
+    path: '/add',
+    name: 'addArticle',
+    component: AddArticle,
+    meta: { authenticationRequired: true }
   },
   {
     path: '/about',

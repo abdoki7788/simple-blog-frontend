@@ -1,5 +1,5 @@
 <template>
-	<div class="home" align="center">
+	<div class="Article" align="center">
 		<article>
 			<h3>{{ article.title }}</h3>
 			<p>{{ article.content }}</p>
