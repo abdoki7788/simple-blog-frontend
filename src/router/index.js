@@ -6,12 +6,18 @@ import Login         from '@/views/Login.vue'
 import Logout        from '@/views/Logout.vue'
 import store         from '@/store'
 import Register      from '@/views/Register.vue'
+import Article      from '@/views/Article.vue'
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/article/:slug',
+    name: 'article',
+    component: Article
   },
   {
     path: '/about',

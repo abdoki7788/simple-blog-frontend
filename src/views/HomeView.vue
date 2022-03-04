@@ -1,7 +1,7 @@
 <template>
 	<div class="home" align="center">
 		<article v-for="article in articles" >
-			<h3><a :href="'/article/'+article.slug">{{ article.title }}</a></h3>
+			<h3><router-link :to="'/article/'+article.slug">{{ article.title }}</router-link></h3>
 			<p>{{ article.content }}</p>
 		</article>
 	</div>
