@@ -4,12 +4,13 @@
 		<h1>Login</h1>
 		<div class="mb-3">
 			<label for="usernameField" class="form-label">Username</label>
-			<input type="text" class="form-control" id="usernameField" aria-describedby="emailHelp" v-model="username">
-			<!-- <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div> -->
+			<input type="text" class="form-control" :class="{'is-invalid': usernameError, 'is-valid': usernameError===false }" id="usernameField" aria-describedby="emailHelp" v-model="username">
+			<div v-if="usernameError" id="emailHelp" class="invalid-feedback">{{ usernameErrorMessage }}</div>
 		</div>
 		<div class="mb-3">
 			<label for="passwordFiels" class="form-label">Password</label>
-			<input type="password" class="form-control" id="passwordFiels" v-model="password">
+			<input type="password" class="form-control" :class="{'is-invalid': passwordError, 'is-valid': passwordError===false }" id="passwordFiels" v-model="password">
+			<div v-if="passwordError" id="emailHelp" class="invalid-feedback">{{ passwordErrorMessage }}</div>
 		</div>
 		<button class="btn btn-success" type="submit">login</button>
 	</form>
@@ -23,15 +24,39 @@ export default {
 	data() {
 		return {
 			username: '',
-			password: ''
+			password: '',
+			usernameError: null,
+			usernameErrorMessage: '',
+			passwordError: null,
+			passwordErrorMessage: '',
 		}
 	},
 	methods: {
 		doLogin() {
-			// this.$store.commit('Login', 'abc123')
-			// this.$router.push('/')
-			console.log(this.username)
-			console.log(this.password)
+			if(this.username.length < 5) {
+				if (this.username.length === 0){
+					this.usernameError = true
+					this.usernameErrorMessage = 'username field cannot be empty'
+				} else {
+					this.usernameErrorMessage = 'The username field must be at least 5 characters long'
+				}
+			} else {
+				this.usernameError = false
+			}
+			if(this.password.length < 6) {
+				if (this.password.length === 0){
+					this.passwordError = true
+					this.passwordErrorMessage = 'password field cannot be empty'
+				} else {
+					this.passwordErrorMessage = 'The password field must be at least 6 characters long'
+				}
+			} else {
+				this.passwordError = false
+			}
+			if(!this.passwordError && !this.usernameError){
+				this.$store.commit('Login', this.username + ':' + this.password)
+				this.$router.push('/')
+			}
 		}
 	}
 }
