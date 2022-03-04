@@ -8,8 +8,8 @@
 			<div v-if="usernameError" id="emailHelp" class="invalid-feedback">{{ usernameErrorMessage }}</div>
 		</div>
 		<div class="mb-3">
-			<label for="passwordFiels" class="form-label">Password</label>
-			<input type="password" class="form-control" :class="{'is-invalid': passwordError, 'is-valid': passwordError===false }" id="passwordFiels" v-model="password">
+			<label for="passwordField" class="form-label">Password</label>
+			<input type="password" class="form-control" :class="{'is-invalid': passwordError, 'is-valid': passwordError===false }" id="passwordField" v-model="password">
 			<div v-if="passwordError" id="emailHelp" class="invalid-feedback">{{ passwordErrorMessage }}</div>
 		</div>
 		<button class="btn btn-success" type="submit">login</button>

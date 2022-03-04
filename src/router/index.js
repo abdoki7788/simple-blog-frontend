@@ -5,6 +5,7 @@ import ProfileView   from '@/views/ProfileView.vue'
 import Login         from '@/views/Login.vue'
 import Logout        from '@/views/Logout.vue'
 import store         from '@/store'
+import Register      from '@/views/Register.vue'
 
 const routes = [
   {
@@ -34,6 +35,12 @@ const routes = [
     name: 'logout',
     component: Logout,
     meta: { authenticationRequired: true }
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register,
+    meta: { notLogedIn : true }
   }
 ]
 
