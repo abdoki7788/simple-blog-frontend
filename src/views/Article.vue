@@ -35,8 +35,14 @@ export default {
 	},
 	methods: {
 		doRemove() {
-			
-			this.$router.push(`/`)
+			axios.delete(`/api/articles/${this.$route.params.slug}/`)
+				.then(response => {
+					this.$router.push(`/`)
+				}).catch(error => {
+					if(error.response.status == 401) {
+						this.$router.push(`/login`)
+					}
+				})
 		}
 	}
 }
