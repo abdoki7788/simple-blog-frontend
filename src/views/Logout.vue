@@ -7,12 +7,19 @@
 
 
 <script>
+import axios from 'axios'
 export default {
 	name: 'logout',
 	methods: {
 		doLogout() {
-			this.$store.commit('Logout')
-			this.$router.push('/login')
+			axios
+				.post(
+					'/api/auth/token/logout/'
+				)
+				.then(response => {
+					this.$store.commit('Logout')
+					this.$router.push('/')
+				})
 		}
 	}
 }
