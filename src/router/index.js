@@ -24,7 +24,8 @@ const routes = [
   {
     path: '/article/:slug/edit',
     name: 'editArticle',
-    component: EditArticle
+    component: EditArticle,
+    meta: { authenticationRequired: true }
   },
   {
     path: '/add',

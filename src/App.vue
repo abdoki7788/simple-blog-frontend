@@ -13,11 +13,11 @@
     },
     watch: {
       $route() {
-        this.$store.commit("onStart")
+        this.$store.dispatch("OnStart")
       }
     },
     mounted() {
-      this.$store.commit("onStart")
+      this.$store.dispatch("OnStart")
     }
   }
 </script>
