@@ -1,7 +1,8 @@
 <template>
 	<div class="home">
 		<article v-if="articles" v-for="(article, index) in articles" class="my-4">
-			<h3><router-link class="text-info text-decoration-none" :to="'/article/'+article.slug">{{ article.title }}</router-link></h3>
+			<h3 class="d-inline"><router-link class="text-info text-decoration-none" :to="'/article/'+article.slug">{{ article.title }}</router-link></h3>
+			<span class="badge bg-success padding-2 mx-2">{{ article.get_date }}</span>
 			<p>{{ description(index) }}</p>
 			<hr>
 		</article>
