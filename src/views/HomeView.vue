@@ -1,25 +1,36 @@
 <template>
-	<div class="home" align="center">
-		<article v-for="(article, index) in articles" >
-			<h3><router-link :to="'/article/'+article.slug">{{ article.title }}</router-link></h3>
+	<div class="home">
+		<article v-if="articles" v-for="(article, index) in articles" class="my-4">
+			<h3><router-link class="text-info text-decoration-none" :to="'/article/'+article.slug">{{ article.title }}</router-link></h3>
 			<p>{{ description(index) }}</p>
+			<hr>
 		</article>
+		<div v-if="!articles.length" class="alert alert-danger">No articles yet</div>
 	</div>
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
 	name: 'HomeView',
 	data() {
 		return {
-			articles : JSON.parse(localStorage.getItem('articles'))
+			articles: "",
 		}
 	},
 	methods: {
 		description(ind) {
 			return this.articles[ind].content.length > 300 ? this.articles[ind].content.slice(0, 300) + ' ...' : this.articles[ind].content
 		}
+	},
+	mounted() {
+		axios.get('/api/articles/').then(response => {
+			this.articles = response.data
+
+		}).catch(error => {
+			this.articles = true
+		})
 	}
 }
 </script>
