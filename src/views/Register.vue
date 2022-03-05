@@ -2,6 +2,7 @@
   <div class="Register">
 	<form class="col-lg-6 mx-auto" @submit.prevent="doRegister()">
 		<h1>Register</h1>
+		<div v-if="nonFieldError" id="nonfielderror" class="invalid-feedback d-block">{{ nonFieldError }}</div>
 		<div class="mb-3">
 			<label for="usernameField" class="form-label">Username</label>
 			<input type="text" class="form-control" :class="{'is-invalid': usernameError, 'is-valid': usernameError===false }" id="usernameField" aria-describedby="emailHelp" v-model="username">
@@ -24,6 +25,7 @@
 
 
 <script>
+import axios from 'axios'
 export default {
 	name: 'register',
 	data() {
@@ -37,6 +39,7 @@ export default {
 			password1ErrorMessage: '',
 			password2Error: null,
 			password2ErrorMessage: '',
+			nonFieldError: ''
 		}
 	},
 	methods: {
@@ -69,8 +72,32 @@ export default {
 				this.password2ErrorMessage = ''
 			}
 			if(!this.password1Error && !this.password2Error && !this.usernameError){
-				this.$store.commit('Login', this.username + ':' + this.password1)
-				this.$router.push('/')
+				axios
+					.post(
+						'/api/auth/users/',
+						{
+							"password": this.password1,
+							"username": this.username
+						}
+					)
+					.then(response => {
+						this.$router.push('/login')
+					})
+					.catch(error => {
+						if(error.response.data.non_field_errors) {
+							this.nonFieldError = error.response.data.non_field_errors.join(' , ')
+							this.password1Error = true
+							this.usernameError = true
+						}
+						if(error.response.data.username) {
+							this.usernameErrorMessage = error.response.data.username.join(' , ')
+							this.usernameError = true
+						}
+						if(error.response.data.password) {
+							this.password1ErrorMessage = error.response.data.password.join(' , ')
+							this.password1Error = true
+						}
+					})
 			}
 		}
 	}

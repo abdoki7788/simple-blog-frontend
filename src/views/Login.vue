@@ -66,7 +66,6 @@ export default {
 						}
 					)
 					.then(response => {
-						console.log(response.data.auth_token)
 						this.$store.commit('Login', response.data.auth_token)
 						this.$router.push('/')
 					})
