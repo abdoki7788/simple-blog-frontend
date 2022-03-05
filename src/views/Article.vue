@@ -12,22 +12,30 @@
 </template>
 
 <script>
+import axios from 'axios'
 
 export default {
 	name: 'Article',
 	data() {
-		let articles = JSON.parse(localStorage.getItem('articles'))
-		let article = articles.find(article => article.slug == this.$route.params.slug)
 		return {
-			article: article,
-			articles: articles,
-			articleIndex: articles.findIndex(article => article.slug == this.$route.params.slug)
+			article: ''
 		}
+	},
+	mounted() {
+		axios.get(`/api/articles/${this.$route.params.slug}`).then(response => {
+			this.article = response.data
+		}).catch(error => {
+			if(error.response.status) {
+				this.$router.push({
+					name:'pageNotFound',
+					params: { pathMatch: this.$route.path.substring(1).split('/') }
+				})
+			}
+		})
 	},
 	methods: {
 		doRemove() {
-			this.articles.splice(this.articleIndex, 1)
-			localStorage.setItem('articles', JSON.stringify(this.articles))
+			
 			this.$router.push(`/`)
 		}
 	}

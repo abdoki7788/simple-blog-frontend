@@ -9,6 +9,7 @@ import Register      from '@/views/Register.vue'
 import Article       from '@/views/Article.vue'
 import AddArticle    from '@/views/AddArticle.vue'
 import EditArticle   from '@/views/EditArticle.vue'
+import PageNotFound  from '@/views/PageNotFound.vue'
 
 const routes = [
   {
@@ -61,6 +62,11 @@ const routes = [
     name: 'register',
     component: Register,
     meta: { notLogedIn : true }
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'pageNotFound',
+    component: PageNotFound
   }
 ]
 
